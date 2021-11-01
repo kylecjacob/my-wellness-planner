@@ -1,6 +1,10 @@
 # MyWellnessPlannerUi
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.12.
+
+## Getting started
+
+Clone the repo then navigate to the folder on your machine. Once there, run `npm install` or `npm i` to install the necessary packages. Once this is done, run `ng serve` to spin up the development server then navigate to `http://localhost:4200` to see the app.
 
 ## Development server
 
