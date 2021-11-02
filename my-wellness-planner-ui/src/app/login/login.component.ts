@@ -15,6 +15,5 @@ export class LoginComponent implements OnInit {
   onSubmitClicked = () => {
     console.log('login clicked');
   }
-  // test
 
 }
