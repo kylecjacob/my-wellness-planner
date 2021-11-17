@@ -13,5 +13,6 @@
     <input type="checkbox" class="form-check-input" id="stayLoggedIn" formControlName="stayLoggedIn">
     <label class="form-check-label" for="stayLoggedIn">Stay logged in</label>
   </div>
+  <div *ngIf="serverError" style="margin-bottom:5px;" class="text-danger">We're sorry, there was an error processing your request. Please try again.</div>
   <button type="submit" class="btn btn-primary">Login</button>
 </form>

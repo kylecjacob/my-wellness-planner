@@ -12,12 +12,14 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  constructor(private formBuilder: FormBuilder, private client: LoginService, private router: Router) { }
+  
   loginForm = this.formBuilder.group({
-    email: ['', Validators.email],
+    email: ['', Validators.required],
     password: ['', Validators.required],
     stayLoggedIn: [false]
   }, { updateOn: 'submit'});
-  loginResponse: LoginResponse;
+  serverError: boolean = false;
 
   get email() {
     return this.loginForm.get('email');
@@ -25,8 +27,6 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.loginForm.get('password');
   }
-
-  constructor(private formBuilder: FormBuilder, private client: LoginService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -37,13 +37,17 @@ export class LoginComponent implements OnInit {
         email: this.email.value,
         password: this.password.value
       };
-      this.getLoginResponse(request);
-      // console.log(response);
-      // this.router.navigresateByUrl('/');
+      this.client.performLogin(request).subscribe({
+        next: (response: HttpResponse<LoginResponse>) => {
+          if (response.ok) {
+            localStorage.setItem('token', response.body.token);
+          }
+        },
+        error: error => {
+          this.serverError = true;
+          // TODO: log error
+        }
+      });
     }
-  }
-
-  getLoginResponse(loginForm: LoginRequest) {
-    this.client.performLogin(loginForm).subscribe((response: HttpResponse<LoginResponse>) => console.log(response));
   }
 }

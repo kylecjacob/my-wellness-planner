@@ -1,6 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginRequest } from '../models/LoginRequest';
 import { LoginResponse } from '../models/LoginResponse';
@@ -13,7 +13,7 @@ export class LoginService {
     loginEndpoint = environment.loginEndpoint;
     constructor(private http: HttpClient) { }
 
-    performLogin(loginRequest: LoginRequest) {
+    performLogin(loginRequest: LoginRequest): Observable<HttpResponse<LoginResponse>> {
         return this.http.post<LoginResponse>(this.url + this.loginEndpoint, loginRequest, {observe: 'response'});
     }
 }
